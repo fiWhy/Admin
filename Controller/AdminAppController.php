@@ -33,8 +33,12 @@ class AdminAppController extends AppController
         ),
         'Paginator' => array(
             'className' => 'Admin.BootstrapPaginator'
-        )
+        ),
     );
+    
+    public function __construct($request = null, $response = null) {
+        parent::__construct($request, $response);
+    }
     
     // Check if they are logged in
     
