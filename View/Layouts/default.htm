@@ -18,13 +18,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title><?php echo isset($pluralHumanName) ? str_replace('Admin ', '', $pluralHumanName) . ' - ' : '' ?><?php echo __('Admin'); ?></title>
+        <title>{{ pluralHumanName }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+         {{ html.css('/Admin/css/bootstrap/bootstrap.min') }}
         {{ html.css('/Admin/css/bootstrap-wysihtml5-0.0.2') }}
         {{ html.css('/Admin/css/datepicker') }}
         {{ html.css('/Admin/css/styles') }}
-        <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>    
         {{ html.script('/Admin/js/advanced') }}
         {{ html.script('/Admin/js/wysihtml5-0.3.0_rc2') }}
@@ -56,7 +55,7 @@
                             
                             <ul class="nav">
                                 {% for nav in navbar %}
-                                    {% if menuItem is 7 %}
+                                    {% if menuItem == 7 %}
                                     
                                     <ul class="nav nav-tabs">
                                         <li class="dropdown">
@@ -67,10 +66,10 @@
                                                 <b class="caret"></b>
                                             </a>
                                     <ul class="dropdown-menu">
-                                        <li {{ nav.url.controller is _view.request.controller?'class="active"': ''}}> {{ html.link(nav.title, nav.url }}</li>
+                                        <li {{ nav.url.controller == _view.request.controller?'class="active"': ''}}> {{ html.link(nav.title, nav.url) }}</li>
                                     
                                     {% else %}
-                                        <li {{ nav.url.controller is _view.request.controller?'class="active"': ''}}> {{ html.link(nav.title, nav.url }}</li>
+                                        <li {{ nav.url.controller == _view.request.controller?'class="active"': ''}}> {{ html.link(nav.title, nav.url) }}</li>
 
                                     {% endif %}
                                     

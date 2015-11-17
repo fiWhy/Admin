@@ -1,0 +1,5 @@
+{{ session.flash() }}
+{{ form.create('User', {'controller': 'Users', 'action': 'login'}) }}
+{{ form.input('username') }}
+{{ form.input('password') }}
+{{ form.end('Login') }}

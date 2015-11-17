@@ -1,4 +1,4 @@
-{#php
+{#
 /**
  * Admin Index
  *
@@ -17,9 +17,9 @@
     {% for nav in navbar %}
     <li>
         {% set icon_link = 'Admin/img/admin_icons/'~nav['icon']~'.png'%}
-        {% set style = 'background-image: url('.$icon_link.');background-repeat: no-repeat; background-position: center 50px; background-size: 50%;' %}
+        {% set style = 'background-image: url('~icon_link~');background-repeat: no-repeat; background-position: center 50px; background-size: 50%;' %}
         
-        {{ html.link(nav.title, nav.url, {'class':nav.icon, 'style':style})
+        {{ html.link(nav.title, nav.url, {'class':nav.icon, 'style':style}) }}
     </li>
     {% endfor %}
 </ul>
