@@ -21,20 +21,21 @@ class UsersController extends AdminAppController {
     var $helpers = array('Form');
 
     function login_form() {
-
+           $this->layout = 'login';
     }
 
     function login() {
-
         if (empty($this->data['User']['username']) == false) {
                 
             $user = $this->User->find('all', array('conditions' => array('User.username' => $this->data['User']['username'], 'User.password' =>md5($this->data['User']['password']))));
-            if($user != false) {   
+            if($user != false) {  
+                
                 $this->Session->setFlash('Thank you for logging in!');
                 $this->Session->write('User', $user);
                 $this->Redirect(array('controller' => '', 'action' => 'index'));
                 exit();
             } else {
+        exit($this->data['User']['username']);
                 $this -> Session -> setFlash('Incorrect username/password!', true);
                 $this -> Redirect(array('action' => 'login_form'));
                 exit();
