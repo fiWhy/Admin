@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="AdminApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,6 +27,22 @@
         {{ html.script('/Admin/plugins/slimScroll/jquery.slimscroll.min') }}
         {{ html.script('/Admin/plugins/fastclick/fastclick') }}
         {{ html.script('/Admin/dist/js/app.min.js') }}
+        
+        
+        {{ html.script('/Admin/plugins/datatables/jquery.dataTables.min.js') }}
+        
+        {{ html.script('/Admin/angular/angular.min.js') }}
+        
+        {{ html.script('/Admin/angular/app/modules/postfix.js') }}
+        {{ html.script('/Admin/angular/app/directives/datatables/angular-datatables.min.js') }}
+        
+        
+        {{ html.script('/Admin/angular/app/app.js') }}
+        {{ html.script('/Admin/angular/app/config.js') }}
+        {{ html.script('/Admin/angular/app/filters.js') }}
+        
+        
+        {{ html.script('/Admin/angular/app/directives/datatables.directive.js') }}
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

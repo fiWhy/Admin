@@ -29,4 +29,14 @@ class AdminUsersController extends AdminAppController{
             'boxTitle' => 'Users list'
         ]);
     }
+    
+    public function getUsers()
+    {
+        $this->loadModel('User');
+        $users = $this->User->find('all');
+        $this->set([
+           'users' => $users,
+            '_serialize' => 'users'
+        ]);
+    }
 }
