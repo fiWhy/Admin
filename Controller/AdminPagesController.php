@@ -12,10 +12,10 @@ App::uses('AdminAppController', 'Admin.Controller');
  *
  * @author denis
  */
-class AdminPagesController {
+class AdminPagesController extends AdminAppController{
     
     public function dashboard()
     {
-        exit('asd');
+        $this->render('../Layouts/dashboard');
     }
 }

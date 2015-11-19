@@ -17,14 +17,12 @@ class AdminUsersController extends AdminAppController{
     
     public function beforeRender(){
         parent::beforeRender();
-        
         $this->set('boxBig', 'Users side');
         $this->set('boxMore', 'redact users information');
     }
     
     public function index()
     {
-        
         $this->set([
             'boxTitle' => 'Users list'
         ]);
@@ -34,9 +32,6 @@ class AdminUsersController extends AdminAppController{
     {
         $this->loadModel('User');
         $users = $this->User->find('all');
-        $this->set([
-           'users' => $users,
-            '_serialize' => 'users'
-        ]);
+        $this->sendAjax($users);
     }
 }
