@@ -47,6 +47,79 @@ class AdminAppController extends AppController
     {
         parent::beforeRender();
     }
+
+    public function prepareForDatatable($model)
+    {
+        $this->loadModel($model);
+
+        $data = $this->request->data;
+
+
+        /**
+         * Conditions
+         */
+
+        $conditions = [];
+
+
+        $order = [
+            $model.'.'.$data['columns'][$data['order'][0]['column']]['data'] => $data['order'][0]['dir']
+        ];
+
+
+            /**
+             * Searching and found
+            */
+            $searchableFields = ['User.id'];
+
+            $conditions['or'] = [];
+            $search = false;
+            if(!empty($data['search']['value']))
+                $search = true;
+            foreach ($data['columns'] as $k => $column) {
+
+                $searchableFields[$k+1] = $model.'.'.$column['data'];
+
+                /**
+                 * Make search if searchable
+                 */
+                if ($column['searchable'] == 'true' && $search) {
+                    $conditions['or'][] = [$model.'.'.$column['data'].' like' => '%'.$data['search']['value'].'%'];
+
+                    if(!empty($columns['search']['value']))
+                        $conditions['or'][] = [$model.'.'.$column['data'].' like' => '%'.$column['search']['value'].'%'];
+                }
+
+            }
+
+        $this->sendAjax($conditions);
+
+        $this->Paginator->settings = [
+            'limit' => $data['length'],
+            'fields' => $searchableFields,
+            'page' => $data['start'],
+            'order' => $order,
+            'conditions' => $conditions
+        ];
+
+
+        $count = $this->$model->find('count', [
+            'conditions' => $conditions
+        ]);
+
+        $items = [];
+
+        foreach($this->Paginator->paginate($model) as $key => $field){
+            $items[] = $field[$model];
+        }
+
+        return [
+            "draw" => $data['draw'],
+            "recordsTotal" => $count,
+            "recordsFiltered" => $count,
+            'data' => $items
+        ];
+    }
     
     public function sendAjax(array $data)
     {

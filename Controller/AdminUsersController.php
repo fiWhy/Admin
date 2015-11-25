@@ -30,8 +30,6 @@ class AdminUsersController extends AdminAppController{
     
     public function getUsers()
     {
-        $this->loadModel('User');
-        $users = $this->User->find('all');
-        $this->sendAjax($users);
+        $this->sendAjax($this->prepareForDatatable('User'));
     }
 }
